@@ -18,8 +18,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun rollDice() {
 
+        var randomInt = (1..6).random()
+
         val resultText: TextView = findViewById(R.id.result_text)
-        resultText.text = "Dice Rolled!"
+        resultText.text = randomInt.toString()
 
 
         Toast.makeText(this, "button clicked",

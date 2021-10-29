@@ -3,6 +3,7 @@ package com.miatorresch.diceroller
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +17,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun rollDice() {
+
+        val resultText: TextView = findViewById(R.id.result_text)
+        resultText.text = "Dice Rolled!"
+
+
         Toast.makeText(this, "button clicked",
             Toast.LENGTH_SHORT).show()
     }

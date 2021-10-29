@@ -2,5 +2,6 @@
     <string name="app_name">DiceRoller</string>
     <string name="roll_label">Roll</string>
     <string name="countup_label">Count Up</string>
+    <string name="reset_label">reset</string>
 
 </resources>

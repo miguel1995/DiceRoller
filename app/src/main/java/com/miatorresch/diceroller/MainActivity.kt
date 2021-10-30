@@ -3,13 +3,25 @@ package com.miatorresch.diceroller
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var diceImage : ImageView
+    lateinit var diceImage2 : ImageView
+    var currentInt1 : Int = 1
+    var currentInt2 : Int = 1
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        diceImage = findViewById(R.id.dice_image)
+        diceImage2 = findViewById(R.id.dice_image2)
+
 
         var rollButton: Button = findViewById(R.id.roll_button)
         rollButton.setOnClickListener{rollDice()}
@@ -24,10 +36,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun rollDice() {
 
-        var randomInt = (1..6).random()
 
-        val resultText: TextView = findViewById(R.id.result_text)
-        resultText.text = randomInt.toString()
+        currentInt1 =  getRandomDiceImage()
+        currentInt2 =  getRandomDiceImage()
+
+        diceImage.setImageResource(currentInt1)
+        diceImage2.setImageResource(currentInt2)
 
 
         Toast.makeText(this, "button clicked",
@@ -36,20 +50,45 @@ class MainActivity : AppCompatActivity() {
 
     private fun countUp() {
 
-        val resultText: TextView = findViewById(R.id.result_text)
-        if(resultText.text.toString() == "Hello World!"){
-            resultText.text = 1.toString()
-        }else if(resultText.text.toString().toInt() < 6){
-            resultText.text = (resultText.text.toString().toInt() + 1).toString()
-        }
+
+        val drawableUp =  getDiceImageUp (currentInt1)
+        val drawableUp2 =  getDiceImageUp (currentInt2)
+
+        diceImage.setImageResource(drawableUp)
+        diceImage2.setImageResource(drawableUp2)
+
+
 
     }
 
     private fun reset(){
+        diceImage.setImageResource(R.drawable.empty_dice)
+        diceImage2.setImageResource(R.drawable.empty_dice)
+    }
 
-        val resultText: TextView = findViewById(R.id.result_text)
-        resultText.text = 0.toString()
+    private fun getRandomDiceImage() : Int {
+        var randomInt = (1..6).random()
+
+        return when (randomInt) {
+            1 -> R.drawable.dice_1
+            2 -> R.drawable.dice_2
+            3 -> R.drawable.dice_3
+            4 -> R.drawable.dice_4
+            5 -> R.drawable.dice_5
+            else -> R.drawable.dice_6
+        }
+    }
+
+    private fun getDiceImageUp(intImage:Int):Int {
+        return  when (intImage) {
+            1 -> R.drawable.dice_2
+            2 -> R.drawable.dice_3
+            3 -> R.drawable.dice_4
+            4 -> R.drawable.dice_5
+            5 -> R.drawable.dice_6
+            else -> R.drawable.dice_6
+        }
     }
 
 
-}
+    }
